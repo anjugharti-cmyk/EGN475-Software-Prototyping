@@ -1,4 +1,4 @@
-from flask import Flask, render_template, abort
+def service_detail(service_id):
 
 app = Flask(__name__)
 
