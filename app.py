@@ -1,3 +1,5 @@
+import os
+import db
 from flask import Flask, render_template, abort
 
 app = Flask(__name__)
