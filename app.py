@@ -1,4 +1,4 @@
-def service_detail(service_id):
+from flask import Flask, render_template, abort
 
 app = Flask(__name__)
 
@@ -26,18 +26,15 @@ appointment_data = [
     {"id": 3, "service": "Facial", "date": "2026-11-22", "time": "03:00 PM", "status": "Confirmed"}
 ]
 
-
 # Home page
 @app.route("/")
 def index():
     return render_template("index.html")
 
-
 # Services page
 @app.route("/services", endpoint="services")
 def services_page():
     return render_template("services.html", services=service_data)
-
 
 # Service detail page
 @app.route("/services/<int:service_id>")
@@ -52,24 +49,20 @@ def service_detail(service_id):
 
     return render_template("service-detail.html", service=service)
 
-
 # Book appointment page
 @app.route("/book")
 def book():
     return render_template("book.html", services=service_data)
-
 
 # Staff calendar page
 @app.route("/calendar")
 def calendar():
     return render_template("calendar.html", calendar_events=calendar_events)
 
-
 # Appointment history page
 @app.route("/appointments", endpoint="appointments")
 def appointments_page():
     return render_template("appointments.html", appointments=appointment_data)
-
 
 if __name__ == "__main__":
     app.run(debug=True)
