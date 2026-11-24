@@ -1,6 +1,6 @@
+from flask import Flask, render_template, abort
 
-
-def service_detail(service_id):
+app = Flask(__name__)
 
 # Sample salon services
 service_data = [
@@ -73,4 +73,3 @@ def appointments_page():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
