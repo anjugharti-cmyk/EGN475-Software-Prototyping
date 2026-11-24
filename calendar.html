@@ -1,0 +1,21 @@
+<h1>Staff Calendar</h1>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Staff Member</th>
+        <th>Service</th>
+        <th>Date</th>
+        <th>Time</th>
+    </tr>
+
+    {% for event in calendar_events %}
+    <tr>
+        <td>{{ event.staff }}</td>
+        <td>{{ event.service }}</td>
+        <td>{{ event.date }}</td>
+        <td>{{ event.time }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
