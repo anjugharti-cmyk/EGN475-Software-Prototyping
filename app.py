@@ -70,8 +70,18 @@ def service_detail(service_id):
 # Book appointment page
 @app.route("/book")
 def book():
-    return render_template("book.html", services=service_data)
+    database = db.get_db()
 
+    services = database.execute(
+        """
+        SELECT id, name, duration_minutes, price_cents
+        FROM services
+        WHERE active = 1
+        ORDER BY name
+        """
+    ).fetchall()
+
+    return render_template("book.html", services=services)
 # Staff calendar page
 @app.route("/calendar")
 def calendar():
