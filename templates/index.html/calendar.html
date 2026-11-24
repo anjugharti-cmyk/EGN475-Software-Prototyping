@@ -1,3 +1,5 @@
+
+
 {% extends "base.html" %}
 
 {% block content %}
@@ -5,20 +7,18 @@
 
 <table border="1" cellpadding="10">
     <tr>
-        <th>Customer</th>
+        <th>Staff Member</th>
         <th>Service</th>
         <th>Date</th>
         <th>Time</th>
-        <th>Status</th>
     </tr>
 
-    {% for appointment in appointments %}
+    {% for event in calendar_events %}
     <tr>
-        <td>{{ appointment.customer }}</td>
-        <td>{{ appointment.service }}</td>
-        <td>{{ appointment.date }}</td>
-        <td>{{ appointment.time }}</td>
-        <td>{{ appointment.status }}</td>
+        <td>{{ event.staff }}</td>
+        <td>{{ event.service }}</td>
+        <td>{{ event.date }}</td>
+        <td>{{ event.time }}</td>
     </tr>
     {% endfor %}
 </table>
