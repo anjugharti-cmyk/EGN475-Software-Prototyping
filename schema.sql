@@ -12,8 +12,10 @@ CREATE TABLE users (
 CREATE TABLE services (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
+    category TEXT NOT NULL,
     duration_minutes INTEGER NOT NULL,
     price_cents INTEGER NOT NULL,
+    description TEXT NOT NULL,
     active INTEGER NOT NULL DEFAULT 1
 );
 
@@ -32,14 +34,14 @@ CREATE TABLE appointments (
 );
 
 INSERT INTO services
-    (name, duration_minutes, price_cents, active)
+    (name, category, duration_minutes, price_cents, description, active)
 VALUES
-    ('Haircut', 45, 3500, 1),
-    ('Hair Coloring', 120, 8500, 1),
-    ('Manicure', 45, 3000, 1),
-    ('Pedicure', 60, 4000, 1),
-    ('Facial', 60, 5500, 1),
-    ('Blowout', 45, 4500, 1);
+    ('Haircut', 'Hair', 45, 3500, 'Professional haircut and styling.', 1),
+    ('Hair Coloring', 'Hair', 120, 8500, 'Professional hair coloring.', 1),
+    ('Manicure', 'Nails', 45, 3000, 'Nail shaping and polish.', 1),
+    ('Pedicure', 'Nails', 60, 4000, 'Relaxing foot treatment.', 1),
+    ('Facial', 'Skin Care', 60, 5500, 'Refreshing facial treatment.', 1),
+    ('Blowout', 'Hair', 45, 4500, 'Professional blowout and styling.', 1);
 
 INSERT INTO appointments
     (service_id, client_name, date, time, status, notes)
