@@ -1,8 +1,6 @@
 
 
-from flask import Flask, render_template, abort
-
-app = Flask(__name__)
+def service_detail(service_id):
 
 # Sample salon services
 service_data = [
