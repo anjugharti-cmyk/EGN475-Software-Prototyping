@@ -1,8 +1,12 @@
 import os
 import db
-from flask import Flask, render_template, abort
+from flask import Flask, render_template, abort, request, redirect, url_for
 
 app = Flask(__name__)
+
+app.config["DATABASE"] = os.path.join(app.instance_path, "salon.sqlite")
+os.makedirs(app.instance_path, exist_ok=True)
+db.init_app(app)
 
 # Sample salon services
 service_data = [
@@ -36,15 +40,27 @@ def index():
 # Services page
 @app.route("/services", endpoint="services")
 def services_page():
-    return render_template("services.html", services=service_data)
+    database = db.get_db()
 
+    services = database.execute(
+        """
+        SELECT id, name, duration_minutes, price_cents
+        FROM services
+        WHERE active = 1
+        ORDER BY name
+        """
+    ).fetchall()
+
+    return render_template("services.html", services=services)
 # Service detail page
 @app.route("/services/<int:service_id>")
 def service_detail(service_id):
-    service = next(
-        (item for item in service_data if item["id"] == service_id),
-        None
-    )
+    database = db.get_db()
+
+    service = database.execute(
+        "SELECT * FROM services WHERE id = ?",
+        (service_id,)
+    ).fetchone()
 
     if service is None:
         abort(404)
